@@ -103,8 +103,8 @@ static void release_rq_locks_irqrestore(const cpumask_t *cpus,
  */
 #define MIN_SCHED_RAVG_WINDOW (3333333 * 6)
 #else
-/* Min window size (in ns) = 20ms */
-#define MIN_SCHED_RAVG_WINDOW 20000000
+/* Min window size (in ns) = 4ms */
+#define MIN_SCHED_RAVG_WINDOW 4000000
 #endif
 
 /* Max window size (in ns) = 1s */
@@ -118,7 +118,7 @@ unsigned int sysctl_sched_walt_rotate_big_tasks;
 unsigned int walt_rotation_enabled;
 
 __read_mostly unsigned int sysctl_sched_asym_cap_sibling_freq_match_pct = 100;
-__read_mostly unsigned int sched_ravg_hist_size = 5;
+__read_mostly unsigned int sched_ravg_hist_size = 4;
 
 static __read_mostly unsigned int sched_io_is_busy = 1;
 
@@ -3804,9 +3804,9 @@ void sched_set_refresh_rate(enum fps fps)
 		if (fps > FPS90)
 			display_sched_ravg_window_nr_ticks = 2;
 		else if (fps == FPS90)
-			display_sched_ravg_window_nr_ticks = 3;
+			display_sched_ravg_window_nr_ticks = 2;
 		else
-			display_sched_ravg_window_nr_ticks = 5;
+			display_sched_ravg_window_nr_ticks = 4;
 
 		sched_window_nr_ticks_change();
 	}

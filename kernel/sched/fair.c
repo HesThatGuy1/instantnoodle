@@ -91,8 +91,8 @@ module_param(main_preempt_disable, uint, 0664);
  *
  * (default: 6ms * (1 + ilog(ncpus)), units: nanoseconds)
  */
-unsigned int sysctl_sched_latency			= 6000000ULL;
-unsigned int normalized_sysctl_sched_latency		= 6000000ULL;
+unsigned int sysctl_sched_latency			= 4000000ULL;
+unsigned int normalized_sysctl_sched_latency		= 4000000ULL;
 
 /*
  * Enable/disable honoring sync flag in energy-aware wakeups.
@@ -119,20 +119,20 @@ extern void ohm_schedstats_record(int sched_type, int fg, u64 delta);
  *
  * (default SCHED_TUNABLESCALING_LOG = *(1+ilog(ncpus))
  */
-enum sched_tunable_scaling sysctl_sched_tunable_scaling = SCHED_TUNABLESCALING_LOG;
+enum sched_tunable_scaling sysctl_sched_tunable_scaling = SCHED_TUNABLESCALING_LINEAR;
 
 /*
  * Minimal preemption granularity for CPU-bound tasks:
  *
- * (default: 0.75 msec * (1 + ilog(ncpus)), units: nanoseconds)
+ * (default: 0.75ms * (1 + ilog(ncpus)), units: nanoseconds)
  */
-unsigned int sysctl_sched_min_granularity		= 750000ULL;
-unsigned int normalized_sysctl_sched_min_granularity	= 750000ULL;
+unsigned int sysctl_sched_min_granularity		= 1000000ULL;
+unsigned int normalized_sysctl_sched_min_granularity	= 1000000ULL;
 
 /*
  * This value is kept at sysctl_sched_latency/sysctl_sched_min_granularity
  */
-static unsigned int sched_nr_latency = 8;
+static unsigned int sched_nr_latency = 4;
 
 /*
  * After fork, child runs first. If set to 0 (default) then
@@ -147,7 +147,7 @@ unsigned int sysctl_sched_child_runs_first __read_mostly;
  * and reduces their over-scheduling. Synchronous workloads will still
  * have immediate wakeup/sleep latencies.
  *
- * (default: 1 msec * (1 + ilog(ncpus)), units: nanoseconds)
+ * (default: 1ms * (1 + ilog(ncpus)), units: nanoseconds)
  */
 unsigned int sysctl_sched_wakeup_granularity		= 1000000UL;
 unsigned int normalized_sysctl_sched_wakeup_granularity	= 1000000UL;
@@ -174,9 +174,9 @@ int __weak arch_asym_cpu_priority(int cpu)
  * to consumption or the quota being specified to be smaller than the slice)
  * we will always only issue the remaining available time.
  *
- * (default: 5 msec, units: microseconds)
+ * (default: 5ms, units: microseconds)
  */
-unsigned int sysctl_sched_cfs_bandwidth_slice		= 5000UL;
+unsigned int sysctl_sched_cfs_bandwidth_slice		= 4000UL;
 #endif
 
 /*
@@ -8872,7 +8872,7 @@ static struct task_struct *detach_one_task(struct lb_env *env)
 	return NULL;
 }
 
-static const unsigned int sched_nr_migrate_break = 32;
+static const unsigned int sched_nr_migrate_break = 2;
 
 /*
  * detach_tasks() -- tries to detach up to imbalance weighted load from
