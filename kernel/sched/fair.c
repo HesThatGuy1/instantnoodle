@@ -91,8 +91,8 @@ module_param(main_preempt_disable, uint, 0664);
  *
  * (default: 6ms * (1 + ilog(ncpus)), units: nanoseconds)
  */
-unsigned int sysctl_sched_latency			= 6000000ULL;
-unsigned int normalized_sysctl_sched_latency		= 6000000ULL;
+unsigned int sysctl_sched_latency			= 1000000ULL;
+unsigned int normalized_sysctl_sched_latency		= 1000000ULL;
 
 /*
  * Enable/disable honoring sync flag in energy-aware wakeups.
@@ -119,15 +119,15 @@ extern void ohm_schedstats_record(int sched_type, int fg, u64 delta);
  *
  * (default SCHED_TUNABLESCALING_LOG = *(1+ilog(ncpus))
  */
-enum sched_tunable_scaling sysctl_sched_tunable_scaling = SCHED_TUNABLESCALING_LOG;
+enum sched_tunable_scaling sysctl_sched_tunable_scaling = SCHED_TUNABLESCALING_LINEAR;
 
 /*
  * Minimal preemption granularity for CPU-bound tasks:
  *
  * (default: 0.75 msec * (1 + ilog(ncpus)), units: nanoseconds)
  */
-unsigned int sysctl_sched_min_granularity		= 750000ULL;
-unsigned int normalized_sysctl_sched_min_granularity	= 750000ULL;
+unsigned int sysctl_sched_min_granularity		= 125000ULL;
+unsigned int normalized_sysctl_sched_min_granularity	= 125000ULL;
 
 /*
  * This value is kept at sysctl_sched_latency/sysctl_sched_min_granularity
@@ -149,10 +149,10 @@ unsigned int sysctl_sched_child_runs_first __read_mostly;
  *
  * (default: 1 msec * (1 + ilog(ncpus)), units: nanoseconds)
  */
-unsigned int sysctl_sched_wakeup_granularity		= 1000000UL;
-unsigned int normalized_sysctl_sched_wakeup_granularity	= 1000000UL;
+unsigned int sysctl_sched_wakeup_granularity		= 500000UL;
+unsigned int normalized_sysctl_sched_wakeup_granularity	= 500000UL;
 
-const_debug unsigned int sysctl_sched_migration_cost	= 500000UL;
+const_debug unsigned int sysctl_sched_migration_cost	= 250000UL;
 DEFINE_PER_CPU_READ_MOSTLY(int, sched_load_boost);
 
 #ifdef CONFIG_SMP
@@ -174,9 +174,9 @@ int __weak arch_asym_cpu_priority(int cpu)
  * to consumption or the quota being specified to be smaller than the slice)
  * we will always only issue the remaining available time.
  *
- * (default: 5 msec, units: microseconds)
+ * (default: 0.5 msec, units: microseconds)
  */
-unsigned int sysctl_sched_cfs_bandwidth_slice		= 5000UL;
+unsigned int sysctl_sched_cfs_bandwidth_slice		= 500UL;
 #endif
 
 /*
@@ -8872,7 +8872,7 @@ static struct task_struct *detach_one_task(struct lb_env *env)
 	return NULL;
 }
 
-static const unsigned int sched_nr_migrate_break = 32;
+static const unsigned int sched_nr_migrate_break = 128;
 
 /*
  * detach_tasks() -- tries to detach up to imbalance weighted load from

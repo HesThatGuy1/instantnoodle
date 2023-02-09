@@ -103,8 +103,8 @@ static void release_rq_locks_irqrestore(const cpumask_t *cpus,
  */
 #define MIN_SCHED_RAVG_WINDOW (3333333 * 6)
 #else
-/* Min window size (in ns) = 20ms */
-#define MIN_SCHED_RAVG_WINDOW 20000000
+/* Min window size (in ns) = 5ms */
+#define MIN_SCHED_RAVG_WINDOW 5000000
 #endif
 
 /* Max window size (in ns) = 1s */
@@ -130,7 +130,7 @@ unsigned int sysctl_sched_ravg_window_nr_ticks = (HZ / NR_WINDOWS_PER_SEC);
 static unsigned int display_sched_ravg_window_nr_ticks =
 	(HZ / NR_WINDOWS_PER_SEC);
 
-unsigned int sysctl_sched_dynamic_ravg_window_enable = (HZ == 250);
+unsigned int sysctl_sched_dynamic_ravg_window_enable = (HZ == 1000);
 
 /* Window size (in ns) */
 __read_mostly unsigned int sched_ravg_window = MIN_SCHED_RAVG_WINDOW;
@@ -3783,7 +3783,7 @@ int sched_ravg_window_handler(struct ctl_table *table,
 
 	mutex_lock(&mutex);
 
-	if (write && (HZ != 250 || !sysctl_sched_dynamic_ravg_window_enable))
+	if (write && (HZ != 1000 || !sysctl_sched_dynamic_ravg_window_enable))
 		goto unlock;
 
 	prev_value = sysctl_sched_ravg_window_nr_ticks;
@@ -3800,13 +3800,13 @@ unlock:
 
 void sched_set_refresh_rate(enum fps fps)
 {
-	if (HZ == 250 && sysctl_sched_dynamic_ravg_window_enable) {
+	if (HZ == 1000 && sysctl_sched_dynamic_ravg_window_enable) {
 		if (fps > FPS90)
-			display_sched_ravg_window_nr_ticks = 2;
+			display_sched_ravg_window_nr_ticks = 1;
 		else if (fps == FPS90)
-			display_sched_ravg_window_nr_ticks = 3;
+			display_sched_ravg_window_nr_ticks = 2;
 		else
-			display_sched_ravg_window_nr_ticks = 5;
+			display_sched_ravg_window_nr_ticks = 3;
 
 		sched_window_nr_ticks_change();
 	}
