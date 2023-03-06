@@ -473,7 +473,7 @@
 			regulator-min-microvolt
 				= <RPMH_REGULATOR_LEVEL_RETENTION>;
 			regulator-max-microvolt
-				= <RPMH_REGULATOR_LEVEL_MAX>;
+				= <RPMH_REGULATOR_LEVEL_MIN_SVS>;
 			qcom,init-voltage-level
 				= <RPMH_REGULATOR_LEVEL_RETENTION>;
 		};
