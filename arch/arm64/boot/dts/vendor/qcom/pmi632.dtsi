@@ -381,11 +381,13 @@
 						"bcl-lvl2";
 			qcom,ibat-use-qg-adc-5a;
 			#thermal-sensor-cells = <1>;
+			status = "disabled";
 		};
 
 		bcl_soc: bcl-soc {
 			compatible = "qcom,msm-bcl-soc";
 			#thermal-sensor-cells = <0>;
+			status = "disabled";
 		};
 	};
 
