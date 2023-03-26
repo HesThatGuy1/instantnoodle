@@ -317,7 +317,7 @@ static void sugov_deferred_update(struct sugov_policy *sg_policy, u64 time,
 	sched_irq_work_queue(&sg_policy->irq_work);
 }
 
-#define TARGET_LOAD 80
+#define TARGET_LOAD 55
 /**
  * get_next_freq - Compute a new frequency for a given cpufreq policy.
  * @sg_policy: schedutil policy object to compute the new frequency for.
@@ -622,8 +622,8 @@ static inline bool sugov_cpu_is_busy(struct sugov_cpu *sg_cpu) { return false; }
 #endif /* CONFIG_NO_HZ_COMMON */
 
 #define NL_RATIO 75
-#define DEFAULT_HISPEED_LOAD 90
-#define DEFAULT_CPU0_RTG_BOOST_FREQ 1000000
+#define DEFAULT_HISPEED_LOAD 45
+#define DEFAULT_CPU0_RTG_BOOST_FREQ 0
 #define DEFAULT_CPU4_RTG_BOOST_FREQ 0
 #define DEFAULT_CPU7_RTG_BOOST_FREQ 0
 static void sugov_walt_adjust(struct sugov_cpu *sg_cpu, unsigned long *util,
@@ -1279,6 +1279,9 @@ static int sugov_init(struct cpufreq_policy *policy)
 	tunables->down_rate_limit_us = cpufreq_policy_transition_delay_us(policy);
 	tunables->hispeed_load = DEFAULT_HISPEED_LOAD;
 	tunables->hispeed_freq = 0;
+
+	tunables->down_rate_limit_us = 40000;
+	tunables->hispeed_freq = 1344000;
 
 	switch (policy->cpu) {
 	default:

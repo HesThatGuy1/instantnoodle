@@ -107,8 +107,8 @@ static void release_rq_locks_irqrestore(const cpumask_t *cpus,
 #define MIN_SCHED_RAVG_WINDOW 5000000
 #endif
 
-/* Max window size (in ns) = 1s */
-#define MAX_SCHED_RAVG_WINDOW 1000000000
+/* Max window size (in ns) = 5ms */
+#define MAX_SCHED_RAVG_WINDOW 5000000
 
 #define NR_WINDOWS_PER_SEC (NSEC_PER_SEC / MIN_SCHED_RAVG_WINDOW)
 
@@ -147,7 +147,7 @@ static __read_mostly unsigned int walt_cpu_util_freq_divisor;
 /* Initial task load. Newly created tasks are assigned this load. */
 unsigned int __read_mostly sched_init_task_load_windows;
 unsigned int __read_mostly sched_init_task_load_windows_scaled;
-unsigned int __read_mostly sysctl_sched_init_task_load_pct = 15;
+unsigned int __read_mostly sysctl_sched_init_task_load_pct = 40;
 
 /*
  * Maximum possible frequency across all cpus. Task demand and cpu

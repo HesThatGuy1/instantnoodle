@@ -198,7 +198,7 @@ unsigned int sysctl_sched_min_task_util_for_boost = 205;
 unsigned int sysctl_sched_min_task_util_for_colocation = 139;
 unsigned int sched_task_filter_util = 139;
 #endif
-unsigned int sched_small_task_threshold = 410;
+unsigned int sched_small_task_threshold = 614;
 
 static inline void update_load_add(struct load_weight *lw, unsigned long inc)
 {
