@@ -36,7 +36,7 @@ static DEFINE_SPINLOCK(suspend_lock);
  * CEILING is 50msec, larger than any standard
  * frame length, but less than the idle timer.
  */
-#define CEILING			5000
+#define CEILING			3000
 #define TZ_RESET_ID		0x3
 #define TZ_UPDATE_ID		0x4
 #define TZ_INIT_ID		0x6
@@ -413,7 +413,7 @@ static int tz_get_target_freq(struct devfreq *devfreq, unsigned long *freq)
 			priv->bin.busy_time > CEILING) {
 		val = -1 * level;
 	} else {
-		unsigned int refresh_rate = 180;
+		unsigned int refresh_rate = 90;
 
 		scm_data[0] = level;
 		scm_data[1] = priv->bin.total_time;
