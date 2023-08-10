@@ -101,7 +101,7 @@ static void release_rq_locks_irqrestore(const cpumask_t *cpus,
  * Tick interval becomes to 3333333 due to
  * rounding error when HZ=300.
  */
-#define MIN_SCHED_RAVG_WINDOW (3333333 * 6)
+#define MIN_SCHED_RAVG_WINDOW 3333333
 #else
 /* Min window size (in ns) = 5ms */
 #define MIN_SCHED_RAVG_WINDOW 5000000
@@ -110,7 +110,7 @@ static void release_rq_locks_irqrestore(const cpumask_t *cpus,
 /* Max window size (in ns) = 5ms */
 #define MAX_SCHED_RAVG_WINDOW 5000000
 
-#define NR_WINDOWS_PER_SEC (NSEC_PER_SEC / MIN_SCHED_RAVG_WINDOW)
+#define NR_WINDOWS_PER_SEC (HZ / 5)
 
 __read_mostly unsigned int sysctl_sched_cpu_high_irqload = TICK_NSEC;
 
@@ -118,19 +118,19 @@ unsigned int sysctl_sched_walt_rotate_big_tasks;
 unsigned int walt_rotation_enabled;
 
 __read_mostly unsigned int sysctl_sched_asym_cap_sibling_freq_match_pct = 100;
-__read_mostly unsigned int sched_ravg_hist_size = 5;
+__read_mostly unsigned int sched_ravg_hist_size = 3;
 
 static __read_mostly unsigned int sched_io_is_busy = 1;
 
 __read_mostly unsigned int sysctl_sched_window_stats_policy =
-	WINDOW_STATS_MAX;
+	WINDOW_STATS_AVG;
 
 unsigned int sysctl_sched_ravg_window_nr_ticks = (HZ / NR_WINDOWS_PER_SEC);
 
 static unsigned int display_sched_ravg_window_nr_ticks =
 	(HZ / NR_WINDOWS_PER_SEC);
 
-unsigned int sysctl_sched_dynamic_ravg_window_enable = (HZ == 1000);
+unsigned int sysctl_sched_dynamic_ravg_window_enable = (HZ == 300);
 
 /* Window size (in ns) */
 __read_mostly unsigned int sched_ravg_window = MIN_SCHED_RAVG_WINDOW;
@@ -3783,7 +3783,7 @@ int sched_ravg_window_handler(struct ctl_table *table,
 
 	mutex_lock(&mutex);
 
-	if (write && (HZ != 1000 || !sysctl_sched_dynamic_ravg_window_enable))
+	if (write && (HZ != 300 || !sysctl_sched_dynamic_ravg_window_enable))
 		goto unlock;
 
 	prev_value = sysctl_sched_ravg_window_nr_ticks;
@@ -3800,13 +3800,13 @@ unlock:
 
 void sched_set_refresh_rate(enum fps fps)
 {
-	if (HZ == 1000 && sysctl_sched_dynamic_ravg_window_enable) {
+	if (HZ == 300 && sysctl_sched_dynamic_ravg_window_enable) {
 		if (fps > FPS90)
 			display_sched_ravg_window_nr_ticks = 1;
 		else if (fps == FPS90)
-			display_sched_ravg_window_nr_ticks = 2;
-		else
 			display_sched_ravg_window_nr_ticks = 3;
+		else
+			display_sched_ravg_window_nr_ticks = 5;
 
 		sched_window_nr_ticks_change();
 	}
