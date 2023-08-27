@@ -1083,7 +1083,7 @@
 
 	npu_npu_ddr_latfloor: qcom,npu-npu-ddr-latfloor {
 		compatible = "qcom,devbw-ddr";
-		governor = "powersave";
+		governor = "performance";
 		qcom,src-dst-ports = <MSM_BUS_MASTER_NPU MSM_BUS_SLAVE_EBI_CH0>;
 		operating-points-v2 = <&suspendable_ddr_bw_opp_table>;
 	};
@@ -1162,7 +1162,7 @@
 
 	cpu4_cpu_ddr_qoslat: qcom,cpu4-cpu-ddr-qoslat {
 		compatible = "qcom,devfreq-qoslat";
-		governor = "powersave";
+		governor = "performance";
 		operating-points-v2 = <&qoslat_opp_table>;
 		mboxes = <&qmp_aop 0>;
 	};

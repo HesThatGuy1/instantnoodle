@@ -12,4 +12,4 @@ export CROSS_COMPILE_ARM32=arm-linux-androideabi-
 
 make O=out clean && make O=out mrproper
 make O=out vendor/kona-perf_defconfig
-make -j$(nproc --all) O=out CC=clang
+time make -j$(nproc --all) O=out CC=clang
