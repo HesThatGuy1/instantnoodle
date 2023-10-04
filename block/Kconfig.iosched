@@ -24,7 +24,7 @@ config IOSCHED_DEADLINE
 
 config IOSCHED_CFQ
 	tristate "CFQ I/O scheduler"
-	default n
+	default y
 	---help---
 	  The CFQ I/O scheduler tries to distribute bandwidth equally
 	  among all processes in the system. It should provide a fair
@@ -43,13 +43,13 @@ config CFQ_GROUP_IOSCHED
 choice
 
 	prompt "Default I/O scheduler"
-	default DEFAULT_BFQ
+	default DEFAULT_CFQ
 	help
 	  Select the I/O scheduler which will be used by default for all
 	  block devices.
 
-	config DEFAULT_BFQ
-		bool "BFQ" if IOSCHED_BFQ=y
+	config DEFAULT_DEADLINE
+		bool "Deadline" if IOSCHED_DEADLINE=y
 
 	config DEFAULT_CFQ
 		bool "CFQ" if IOSCHED_CFQ=y
@@ -61,7 +61,7 @@ endchoice
 
 config DEFAULT_IOSCHED
 	string
-	default "bfq" if DEFAULT_BFQ
+	default "deadline" if DEFAULT_DEADLINE
 	default "cfq" if DEFAULT_CFQ
 	default "noop" if DEFAULT_NOOP
 
@@ -82,7 +82,7 @@ config MQ_IOSCHED_KYBER
 
 config IOSCHED_BFQ
 	tristate "BFQ I/O scheduler"
-	default y
+	default n
 	---help---
 	BFQ I/O scheduler for BLK-MQ. BFQ distributes the bandwidth of
 	of the device among all processes according to their weights,
