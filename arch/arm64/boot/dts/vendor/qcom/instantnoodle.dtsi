@@ -195,22 +195,22 @@
 		wake-capable-sensor;
 		trips {
 			skint_therm_trip0: skint_therm_trip0 {
-				temperature = <46000>;
+				temperature = <50000>;
 				hysteresis = <2000>;
 				type = "passive";
 			};
 			skint_therm_trip1: skint_therm_trip1 {
-                                temperature = <47000>;
-                                hysteresis = <1000>;
+                                temperature = <53000>;
+                                hysteresis = <2000>;
                                 type = "passive";
                         };
 			skint_therm_trip2: skint_therm_trip2 {
-				temperature = <48000>;
+				temperature = <56000>;
 				hysteresis = <2000>;
 				type = "passive";
 			};
 			skint_therm_trip3: skint_therm_trip3 {
-				temperature = <50000>;
+				temperature = <59000>;
 				hysteresis = <2000>;
 				type = "passive";
 			};
@@ -282,7 +282,7 @@
 		wake-capable-sensor;
 		trips {
 			msm_therm_trip0: msm_therm_trip0 {
-				temperature = <63000>;
+				temperature = <62000>;
 				hysteresis = <2000>;
 				type = "passive";
 			};
