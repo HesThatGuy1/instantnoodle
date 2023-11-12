@@ -76,10 +76,10 @@
 		qcom,mdss-dsi-panel-status-read-length = <1>;
 		qcom,mdss-dsi-display-timings {
 			timing@0{
-				qcom,mdss-mdp-transfer-time-us = <12000>; //for 60fps
+				qcom,mdss-mdp-transfer-time-us = <5000>; //for 60fps
 				qcom,mdss-dsi-timing-default;
 				qcom,mdss-dsi-panel-framerate = <60>;
-				qcom,mdss-dsi-panel-clockrate = <830000000>;
+				qcom,mdss-dsi-panel-clockrate = <415000000>;
 				qcom,mdss-dsi-t-clk-pre = <0x18>;
 				qcom,mdss-dsi-t-clk-post = <0x17>;
 				qcom,mdss-dsi-panel-width = <1080>;
@@ -398,10 +398,10 @@
 				qcom,mdss-dsc-block-prediction-enable;
 				};
 			timing@1{
-				qcom,mdss-mdp-transfer-time-us = <8000>; //for 90fps
+				qcom,mdss-mdp-transfer-time-us = <3000>; //for 90fps
 				qcom,mdss-dsi-timing-default;
-				qcom,mdss-dsi-panel-framerate = <90>;
-				qcom,mdss-dsi-panel-clockrate = <830000000>;
+				qcom,mdss-dsi-panel-framerate = <120>;
+				qcom,mdss-dsi-panel-clockrate = <415000000>;
 				qcom,mdss-dsi-t-clk-pre = <0x18>;
 				qcom,mdss-dsi-t-clk-post = <0x17>;
 				qcom,mdss-dsi-panel-width = <1080>;
@@ -424,7 +424,7 @@
 				qcom,mdss-dsi-timing-switch-command = [
 					/* 90hz Transition */
 					39 01 00 00 00 00 03 F0 5A 5A
-					39 01 00 00 00 00 02 60 10
+					39 01 00 00 00 00 02 60 20
 					39 01 00 00 00 00 03 F0 A5 A5
 					/* OPEC */
 					39 01 00 00 00 00 03 F0 5A 5A
@@ -513,7 +513,7 @@
 					39 01 00 00 00 00 02 53 20
 					/* 90hz Transition */
 					39 01 00 00 00 00 03 F0 5A 5A
-					39 01 00 00 00 00 02 60 10
+					39 01 00 00 00 00 02 60 20
 					39 01 00 00 00 00 03 F0 A5 A5
 					/* ACL Mode */
 					39 01 00 00 00 00 03 F0 5A 5A
