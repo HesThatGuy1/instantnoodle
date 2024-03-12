@@ -431,11 +431,13 @@
 						"bcl-lvl1",
 						"bcl-lvl2";
 			#thermal-sensor-cells = <1>;
+			status = "disabled";
 		};
 
 		bcl_soc:bcl-soc {
 			compatible = "qcom,msm-bcl-soc";
 			#thermal-sensor-cells = <0>;
+			status = "disabled";
 		};
 	};
 
