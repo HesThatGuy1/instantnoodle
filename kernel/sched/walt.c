@@ -101,16 +101,16 @@ static void release_rq_locks_irqrestore(const cpumask_t *cpus,
  * Tick interval becomes to 3333333 due to
  * rounding error when HZ=300.
  */
-#define MIN_SCHED_RAVG_WINDOW (3333333 * 6)
+#define MIN_SCHED_RAVG_WINDOW 3333333
 #else
-/* Min window size (in ns) = 20ms */
-#define MIN_SCHED_RAVG_WINDOW 20000000
+/* Min window size (in ns) = 1ms */
+#define MIN_SCHED_RAVG_WINDOW 1000000
 #endif
 
 /* Max window size (in ns) = 1s */
 #define MAX_SCHED_RAVG_WINDOW 1000000000
 
-#define NR_WINDOWS_PER_SEC (NSEC_PER_SEC / MIN_SCHED_RAVG_WINDOW)
+#define NR_WINDOWS_PER_SEC (HZ / 5)
 
 __read_mostly unsigned int sysctl_sched_cpu_high_irqload = TICK_NSEC;
 
@@ -118,19 +118,19 @@ unsigned int sysctl_sched_walt_rotate_big_tasks;
 unsigned int walt_rotation_enabled;
 
 __read_mostly unsigned int sysctl_sched_asym_cap_sibling_freq_match_pct = 100;
-__read_mostly unsigned int sched_ravg_hist_size = 5;
+__read_mostly unsigned int sched_ravg_hist_size = 3;
 
 static __read_mostly unsigned int sched_io_is_busy = 1;
 
 __read_mostly unsigned int sysctl_sched_window_stats_policy =
-	WINDOW_STATS_MAX_RECENT_AVG;
+	WINDOW_STATS_AVG;
 
 unsigned int sysctl_sched_ravg_window_nr_ticks = (HZ / NR_WINDOWS_PER_SEC);
 
 static unsigned int display_sched_ravg_window_nr_ticks =
 	(HZ / NR_WINDOWS_PER_SEC);
 
-unsigned int sysctl_sched_dynamic_ravg_window_enable = (HZ == 250);
+unsigned int sysctl_sched_dynamic_ravg_window_enable = (HZ == 300);
 
 /* Window size (in ns) */
 __read_mostly unsigned int sched_ravg_window = MIN_SCHED_RAVG_WINDOW;
@@ -147,7 +147,7 @@ static __read_mostly unsigned int walt_cpu_util_freq_divisor;
 /* Initial task load. Newly created tasks are assigned this load. */
 unsigned int __read_mostly sched_init_task_load_windows;
 unsigned int __read_mostly sched_init_task_load_windows_scaled;
-unsigned int __read_mostly sysctl_sched_init_task_load_pct = 15;
+unsigned int __read_mostly sysctl_sched_init_task_load_pct = 5;
 
 /*
  * Maximum possible frequency across all cpus. Task demand and cpu
@@ -3783,7 +3783,7 @@ int sched_ravg_window_handler(struct ctl_table *table,
 
 	mutex_lock(&mutex);
 
-	if (write && (HZ != 250 || !sysctl_sched_dynamic_ravg_window_enable))
+	if (write && (HZ != 300 || !sysctl_sched_dynamic_ravg_window_enable))
 		goto unlock;
 
 	prev_value = sysctl_sched_ravg_window_nr_ticks;
@@ -3800,9 +3800,9 @@ unlock:
 
 void sched_set_refresh_rate(enum fps fps)
 {
-	if (HZ == 250 && sysctl_sched_dynamic_ravg_window_enable) {
+	if (HZ == 300 && sysctl_sched_dynamic_ravg_window_enable) {
 		if (fps > FPS90)
-			display_sched_ravg_window_nr_ticks = 2;
+			display_sched_ravg_window_nr_ticks = 3;
 		else if (fps == FPS90)
 			display_sched_ravg_window_nr_ticks = 3;
 		else
