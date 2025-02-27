@@ -65,9 +65,9 @@
 			qcom,bus-min-ddr7 = <10>;
 			qcom,bus-max-ddr7 = <11>;
 
-			qcom,bus-freq-ddr8 = <11>;
-			qcom,bus-min-ddr8 = <11>;
-			qcom,bus-max-ddr8 = <11>;
+			qcom,bus-freq-ddr8 = <7>;
+			qcom,bus-min-ddr8 = <6>;
+			qcom,bus-max-ddr8 = <7>;
 
 			qcom,acd-level = <0x802b5ffd>;
 		};
@@ -79,9 +79,9 @@
 			qcom,bus-min-ddr7 = <10>;
 			qcom,bus-max-ddr7 = <11>;
 
-			qcom,bus-freq-ddr8 = <8>;
-			qcom,bus-min-ddr8 = <8>;
-			qcom,bus-max-ddr8 = <11>;
+			qcom,bus-freq-ddr8 = <6>;
+			qcom,bus-min-ddr8 = <5>;
+			qcom,bus-max-ddr8 = <6>;
 
 			qcom,acd-level = <0x802b5ffd>;
 		};
@@ -93,9 +93,9 @@
 			qcom,bus-min-ddr7 = <9>;
 			qcom,bus-max-ddr7 = <10>;
 
-			qcom,bus-freq-ddr8 = <8>;
-			qcom,bus-min-ddr8 = <7>;
-			qcom,bus-max-ddr8 = <9>;
+			qcom,bus-freq-ddr8 = <5>;
+			qcom,bus-min-ddr8 = <4>;
+			qcom,bus-max-ddr8 = <5>;
 
 			qcom,acd-level = <0xa02b5ffd>;
 		};
@@ -107,9 +107,9 @@
 			qcom,bus-min-ddr7 = <9>;
 			qcom,bus-max-ddr7 = <10>;
 
-			qcom,bus-freq-ddr8 = <8>;
-			qcom,bus-min-ddr8 = <7>;
-			qcom,bus-max-ddr8 = <9>;
+			qcom,bus-freq-ddr8 = <4>;
+			qcom,bus-min-ddr8 = <3>;
+			qcom,bus-max-ddr8 = <4>;
 
 			qcom,acd-level = <0xa02b5ffd>;
 		};
@@ -121,9 +121,9 @@
 			qcom,bus-min-ddr7 = <8>;
 			qcom,bus-max-ddr7 = <9>;
 
-			qcom,bus-freq-ddr8 = <8>;
-			qcom,bus-min-ddr8 = <6>;
-			qcom,bus-max-ddr8 = <9>;
+			qcom,bus-freq-ddr8 = <3>;
+			qcom,bus-min-ddr8 = <2>;
+			qcom,bus-max-ddr8 = <3>;
 
 			qcom,acd-level = <0xa02b5ffd>;
 		};
@@ -135,9 +135,9 @@
 			qcom,bus-min-ddr7 = <8>;
 			qcom,bus-max-ddr7 = <9>;
 
-			qcom,bus-freq-ddr8 = <3>;
-			qcom,bus-min-ddr8 = <2>;
-			qcom,bus-max-ddr8 = <9>;
+			qcom,bus-freq-ddr8 = <2>;
+			qcom,bus-min-ddr8 = <1>;
+			qcom,bus-max-ddr8 = <2>;
 
 			qcom,acd-level = <0xa02b5ffd>;
 		};

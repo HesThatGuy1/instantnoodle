@@ -1,6 +1,6 @@
 /dts-v1/;
 
-#include "kona-v2.dtsi"
+#include "kona-v2.1.dtsi"
 #include "kona-rumi.dtsi"
 
 / {

@@ -22,21 +22,21 @@ static DEFINE_SPINLOCK(tz_lock);
 static DEFINE_SPINLOCK(sample_lock);
 static DEFINE_SPINLOCK(suspend_lock);
 /*
- * FLOOR is 2msec to capture up to 3 re-draws
- * per frame for 60fps content.
+ * FLOOR is 1ms to capture up to 3 re-draws
+ * per frame for 120fps content.
  */
-#define FLOOR		        2000
+#define FLOOR		        1000
 /*
- * MIN_BUSY is 1 msec for the sample to be sent
+ * MIN_BUSY is 1ms for the sample to be sent
  */
 #define MIN_BUSY		1000
 #define MAX_TZ_VERSION		0
 
 /*
- * CEILING is 50msec, larger than any standard
+ * CEILING is 1ms, larger than any standard
  * frame length, but less than the idle timer.
  */
-#define CEILING			50000
+#define CEILING		1000
 #define TZ_RESET_ID		0x3
 #define TZ_UPDATE_ID		0x4
 #define TZ_INIT_ID		0x6
@@ -413,12 +413,10 @@ static int tz_get_target_freq(struct devfreq *devfreq, unsigned long *freq)
 			priv->bin.busy_time > CEILING) {
 		val = -1 * level;
 	} else {
-		unsigned int refresh_rate = 120;
 
 		scm_data[0] = level;
 		scm_data[1] = priv->bin.total_time;
-		if (refresh_rate > 60)
-			scm_data[2] = priv->bin.busy_time * (refresh_rate / 60);
+		scm_data[2] = priv->bin.busy_time;
 		scm_data[3] = context_count;
 		__secure_tz_update_entry3(scm_data, sizeof(scm_data),
 					&val, sizeof(val), priv);
