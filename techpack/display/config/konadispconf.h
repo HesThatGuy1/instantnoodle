@@ -17,4 +17,9 @@
 #define CONFIG_MSM_SDE_ROTATOR 1
 #define CONFIG_MSM_SDE_ROTATOR_EVTLOG_DEBUG 1
 #define CONFIG_DRM_SDE_RSC 1
-
+/* OP8Pro only */
+#define CONFIG_PXLW_IRIS 1
+#define CONFIG_PXLW_IRIS5 1
+#define PXLW_IRIS_DUAL 1
+/* OP8 only */
+/* #define CONFIG_PXLW_SOFT_IRIS 1 */
