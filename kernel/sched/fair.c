@@ -147,12 +147,12 @@ unsigned int sysctl_sched_child_runs_first __read_mostly;
  * and reduces their over-scheduling. Synchronous workloads will still
  * have immediate wakeup/sleep latencies.
  *
- * (default: 0.5ms * (1 + ilog2(ncpus)), units: nanoseconds)
+ * (default: 1ms * (1 + ilog2(ncpus)), units: nanoseconds)
  */
-unsigned int sysctl_sched_wakeup_granularity		= 500000UL;
-unsigned int normalized_sysctl_sched_wakeup_granularity	= 500000UL;
+unsigned int sysctl_sched_wakeup_granularity		= 1000000UL;
+unsigned int normalized_sysctl_sched_wakeup_granularity	= 1000000UL;
 
-const_debug unsigned int sysctl_sched_migration_cost	= 250000UL;
+const_debug unsigned int sysctl_sched_migration_cost	= 500000UL;
 DEFINE_PER_CPU_READ_MOSTLY(int, sched_load_boost);
 
 #ifdef CONFIG_SMP
@@ -174,9 +174,9 @@ int __weak arch_asym_cpu_priority(int cpu)
  * to consumption or the quota being specified to be smaller than the slice)
  * we will always only issue the remaining available time.
  *
- * (default: 6ms (ilog2?), units: microseconds)
+ * (default: 4ms, units: microseconds)
  */
-unsigned int sysctl_sched_cfs_bandwidth_slice		= 1500UL;
+unsigned int sysctl_sched_cfs_bandwidth_slice		= 8000UL;
 #endif
 
 /*
@@ -193,12 +193,12 @@ unsigned int sched_capacity_margin_down[NR_CPUS] = {
 
 #ifdef CONFIG_SCHED_WALT
 /* 9.375% of 1024 */
-unsigned int sysctl_sched_min_task_util_for_boost = 23;
+unsigned int sysctl_sched_min_task_util_for_boost = 32;
 /* 6.25% of 1024 */
-unsigned int sysctl_sched_min_task_util_for_colocation = 15;
-unsigned int sched_task_filter_util = 15;
+unsigned int sysctl_sched_min_task_util_for_colocation = 32;
+unsigned int sched_task_filter_util = 32;
 #endif
-unsigned int sched_small_task_threshold = 31;
+unsigned int sched_small_task_threshold = 64;
 
 static inline void update_load_add(struct load_weight *lw, unsigned long inc)
 {
