@@ -107,6 +107,7 @@
 						"bcl-lvl1",
 						"bcl-lvl2";
 			#thermal-sensor-cells = <1>;
+			status = "disabled";
 		};
 
 		pm8150l_adc_tm: adc_tm@3500 {
