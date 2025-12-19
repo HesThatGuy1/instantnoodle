@@ -104,7 +104,7 @@ unsigned int sysctl_sched_walt_rotate_big_tasks;
 unsigned int walt_rotation_enabled;
 
 __read_mostly unsigned int sysctl_sched_asym_cap_sibling_freq_match_pct = 100;
-__read_mostly unsigned int sched_ravg_hist_size = 5;
+__read_mostly unsigned int sched_ravg_hist_size = 1;
 
 static __read_mostly unsigned int sched_io_is_busy = 1;
 
@@ -133,7 +133,7 @@ static __read_mostly unsigned int walt_cpu_util_freq_divisor;
 /* Initial task load. Newly created tasks are assigned this load. */
 unsigned int __read_mostly sched_init_task_load_windows;
 unsigned int __read_mostly sched_init_task_load_windows_scaled;
-unsigned int __read_mostly sysctl_sched_init_task_load_pct = 15;
+unsigned int __read_mostly sysctl_sched_init_task_load_pct = 5;
 
 /*
  * Maximum possible frequency across all cpus. Task demand and cpu
@@ -3785,11 +3785,11 @@ void sched_set_refresh_rate(enum fps fps)
 {
 	if (HZ == 250 && sysctl_sched_dynamic_ravg_window_enable) {
 		if (fps > FPS90)
-			display_sched_ravg_window_nr_ticks = 2;
+			display_sched_ravg_window_nr_ticks = 1;
 		else if (fps == FPS90)
-			display_sched_ravg_window_nr_ticks = 3;
+			display_sched_ravg_window_nr_ticks = 1;
 		else
-			display_sched_ravg_window_nr_ticks = 5;
+			display_sched_ravg_window_nr_ticks = 2;
 
 		sched_window_nr_ticks_change();
 	}
