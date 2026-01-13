@@ -43,17 +43,6 @@
 	warm-bat-decidegc = <450>;
 	hot-bat-decidegc = <500>;
 	qcom,otg-cl-ua = <1500000>;
-	op,sw-iterm-ma = <310>;
-	op,sw-check-full-enable;
-	/* temp region settings */
-	cold-bat-decidegc = <20>;
-	little-cold-bat-decidegc = <0>;
-	cool-bat-decidegc = <50>;
-	little-cool-bat-decidegc = <120>;
-	pre-normal-bat-decidegc = <160>;
-	warm-bat-decidegc = <450>;
-	hot-bat-decidegc = <500>;
-	qcom,otg-cl-ua = <1500000>;
 	op,sw-iterm-ma = <225>;
 	op,sw-check-full-enable;
 
@@ -68,15 +57,15 @@
 	ffc-full-vbat-mv = <4480>;
 
 	/* skin thermal temp adjust the dash current */
-	op,skin-thermal-high-threshold = <41>;
-	op,skin-thermal-pre-high-threshold = <39>;
-	op,skin-thermal-medium-threshold = <38>;
-	op,skin-thermal-normal-threshold = <36>;
+	op,skin-thermal-high-threshold = <38>;
+	op,skin-thermal-pre-high-threshold = <36>;
+	op,skin-thermal-medium-threshold = <34>;
+	op,skin-thermal-normal-threshold = <32>;
 	op,enable-dash-current-dynamic-adjust;
 
 	/* skin thermal temp adjust the pd current */
 	op,pd-skin-thermal-high-threshold = <38>;
-	op,pd-skin-thermal-normal-threshold = <36>;
+	op,pd-skin-thermal-normal-threshold = <32>;
 	op,enable-pd-current-dynamic-adjust;
 	op,slowy-charge-check;
 };
@@ -98,18 +87,18 @@
 		wake-capable-sensor;
 		trips {
 			skin_therm_usr_trip0: skin_therm_usr_trip0 {
-				temperature = <50000>;
-				hysteresis = <7000>;
+				temperature = <48000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 			skin_therm_usr_trip1: skin_therm_usr_trip1 {
-				temperature = <54000>;
-				hysteresis = <9000>;
+				temperature = <50000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 			skin_therm_usr_trip3: skin_therm_usr_trip3 {
-				temperature = <58000>;
-				hysteresis = <7000>;
+				temperature = <52000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 		};
@@ -137,18 +126,18 @@
 		wake-capable-sensor;
 		trips {
 			mmw_pa1_usr_trip0: mmw_pa1_usr_trip0 {
-				temperature = <48000>;
-				hysteresis = <5000>;
+				temperature = <50000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 			mmw_pa1_usr_trip1: mmw_pa1_usr_trip1 {
-				temperature = <50000>;
-				hysteresis = <5000>;
+				temperature = <52000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 			mmw_pa1_usr_trip2: mmw_pa1_usr_trip2 {
-				temperature = <52000>;
-				hysteresis = <5000>;
+				temperature = <54000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 		};
@@ -177,17 +166,17 @@
 		trips {
 			xo_therm_usr_trip0: xo_therm_usr_trip0 {
 				temperature = <56000>;
-				hysteresis = <5000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 			xo_therm_usr_trip1: xo_therm_usr_trip1 {
 				temperature = <58000>;
-				hysteresis = <5000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 			xo_therm_usr_trip2: xo_therm_usr_trip2 {
 				temperature = <60000>;
-				hysteresis = <5000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 		};
@@ -217,17 +206,17 @@
 		trips {
 			modem_mmw2_usr_trip0: modem_mmw2_usr_trip0{
 				temperature = <56000>;
-				hysteresis = <5000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 			modem_mmw2_usr_trip1: modem_mmw2_usr_trip1{
 				temperature = <58000>;
-				hysteresis = <5000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 			modem_mmw2_usr_trip2: modem_mmw2_usr_trip2{
 				temperature = <60000>;
-				hysteresis = <5000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 		};
@@ -247,7 +236,7 @@
 		};
 	};
 
-	skin_therm_19867: skin-therm{
+	skin_therm_19867: skin-therm {
 		polling-delay-passive = <0>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
@@ -255,18 +244,18 @@
 		wake-capable-sensor;
 		trips {
 			skint_therm_trip0: skint_therm_trip0 {
-				temperature = <44000>;
-				hysteresis = <2000>;
+				temperature = <40000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 			skint_therm_trip1: skint_therm_trip1 {
-				temperature = <46000>;
-				hysteresis = <2000>;
+				temperature = <42000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 			skint_therm_trip2: skint_therm_trip2 {
-				temperature = <50000>;
-				hysteresis = <2000>;
+				temperature = <44000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 		};
@@ -274,52 +263,52 @@
 			freq_dev0 {
 				trip = <&skint_therm_trip0>;
 				cooling-device =
-					<&msm_gpu THERMAL_NO_LIMIT (THERMAL_MAX_LIMIT-2)>;/*441.6(SVS_L0)*/
+					<&msm_gpu THERMAL_NO_LIMIT (THERMAL_MAX_LIMIT-3)>;/*305.0MHz*/
 			};
 			freq_dev1 {
 				trip = <&skint_therm_trip0>;
 				cooling-device =
-					<&CPU0 3 3>;/*1516.8MHz(Nominal)*/
+					<&CPU0 3 3>;/*1516.8MHz (Nominal)*/
 			};
 			freq_dev2 {
 				trip = <&skint_therm_trip0>;
 				cooling-device =
-					<&CPU4 9 9>;/*1574.4MHz(Nominal_L1)*/
+					<&CPU4 8 8>;/*1670.4MHz*/
 			};
 			freq_dev3 {
 				trip = <&skint_therm_trip0>;
 				cooling-device =
-					<&CPU7 12 12>;/*1632.0MHz(Nominal)*/
+					<&CPU7 8 8>;/*2073.6MHz (Nominal_L1)*/
 			};
 			freq_dev4 {
 				trip = <&skint_therm_trip1>;
 				cooling-device =
-					<&msm_gpu THERMAL_NO_LIMIT (THERMAL_MAX_LIMIT-1)>;/*400(SVS)*/
+					<&msm_gpu THERMAL_NO_LIMIT (THERMAL_MAX_LIMIT-2)>;/*240.0MHz*/
 			};
 			freq_dev5 {
 				trip = <&skint_therm_trip1>;
 				cooling-device =
-					<&CPU0 5 5>;/*1344MHz(Nominal)*/
+					<&CPU0 5 5>;/*1344.0MHz (Nominal)*/
 			};
 			freq_dev6 {
 				trip = <&skint_therm_trip1>;
 				cooling-device =
-					<&CPU4 14 14>;/*1056Mhz(SVS_L1)*/
+					<&CPU4 14 14>;/*1056.0MHz (SVS_L1)*/
 			};
 			freq_dev7 {
 				trip = <&skint_therm_trip1>;
 				cooling-device =
-					<&cpu7_isolate 1 1>;  /*Disable(cpu7_isolate 1 1)*/
+					<&cpu7_isolate 1 1>;
 			};
 			freq_dev8 {
 				trip = <&skint_therm_trip2>;
 				cooling-device =
-					<&CPU0 10 10>;/*883.2Mhz(SVS)*/
+					<&CPU0 10 10>;/*883.2MHz (SVS)*/
 			};
 			freq_dev9 {
 				trip = <&skint_therm_trip2>;
 				cooling-device =
-					<&cpu4_isolate 1 1>;  /*Disable(cpu4_isolate 1 1)*/
+					<&cpu4_isolate 1 1>;
 			};
 		};
 	};
@@ -332,13 +321,13 @@
 		wake-capable-sensor;
 		trips {
 			msm_therm_trip0: msm_therm_trip0 {
-				temperature = <63000>;
-				hysteresis = <2000>;
+				temperature = <62000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 			msm_therm_trip1: msm_therm_trip1 {
-				temperature = <65000>;
-				hysteresis = <2000>;
+				temperature = <64000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 		};
@@ -346,44 +335,43 @@
 			freq_dev0 {
 				trip = <&msm_therm_trip0>;
 				cooling-device =
-					<&msm_gpu THERMAL_NO_LIMIT (THERMAL_MAX_LIMIT-3)>;/*490(SVS_L1)*/
+					<&msm_gpu THERMAL_NO_LIMIT (THERMAL_MAX_LIMIT-4)>;/*400.0MHz*/
 			};
 			freq_dev1 {
 				trip = <&msm_therm_trip0>;
 				cooling-device =
-					<&CPU0 2 2>;/*1612MHz(Nominal_L1)*/
+					<&CPU0 2 2>;/*1612.8MHz (Nominal_L1)*/
 			};
 			freq_dev2 {
 				trip = <&msm_therm_trip0>;
 				cooling-device =
-					<&CPU4 7 7>;/*1766.4MHz(Nominal_L1)*/
+					<&CPU4 8 8>;/*1670.4MHz*/
 			};
 			freq_dev3 {
 				trip = <&msm_therm_trip0>;
 				cooling-device =
-					<&CPU7 8 8>;/*2073.6MHz(Nominal_L1)*/
+					<&CPU7 8 8>;/*2073.6MHz (Nominal_L1)*/
 			};
 			freq_dev4 {
 				trip = <&msm_therm_trip1>;
 				cooling-device =
-					<&msm_gpu THERMAL_NO_LIMIT (THERMAL_MAX_LIMIT-2)>;/*441.6(SVS_L0)*/
+					<&msm_gpu THERMAL_NO_LIMIT (THERMAL_MAX_LIMIT-3)>;/*305.0MHz*/
 			};
 			freq_dev5 {
 				trip = <&msm_therm_trip1>;
 				cooling-device =
-					<&CPU0 3 3>;/*1516.8MHz(Nominal)*/
+					<&CPU0 3 3>;/*1516.8MHz (Nominal)*/
 			};
 			freq_dev6 {
 				trip = <&msm_therm_trip1>;
 				cooling-device =
-					<&CPU4 9 9>;/*1574.4MHz(Nominal_L1)*/
+					<&CPU4 9 9>;/*1574.4MHz (Nominal_L1)*/
 			};
 			freq_dev7 {
 				trip = <&msm_therm_trip1>;
 				cooling-device =
-				<&CPU7 12 12>;/*1632.0MHz(Nominal)*/
+				    <&CPU7 12 12>;/*1632.0MHz (Nominal)*/
 			};
 		};
 	};
-
 };

@@ -165,17 +165,6 @@
 	warm-bat-decidegc = <450>;
 	hot-bat-decidegc = <500>;
 	qcom,otg-cl-ua = <1500000>;
-	op,sw-iterm-ma = <310>;
-	op,sw-check-full-enable;
-	/* temp region settings */
-	cold-bat-decidegc = <20>;
-	little-cold-bat-decidegc = <0>;
-	cool-bat-decidegc = <50>;
-	little-cool-bat-decidegc = <120>;
-	pre-normal-bat-decidegc = <160>;
-	warm-bat-decidegc = <450>;
-	hot-bat-decidegc = <500>;
-	qcom,otg-cl-ua = <1500000>;
 	op,sw-iterm-ma = <235>;
 	op,sw-check-full-enable;
 
@@ -190,15 +179,15 @@
 	ffc-full-vbat-mv = <4480>;
 
 	/* skin thermal temp adjust the dash current */
-	op,skin-thermal-high-threshold = <41>;
-	op,skin-thermal-pre-high-threshold = <39>;
-	op,skin-thermal-medium-threshold = <38>;
-	op,skin-thermal-normal-threshold = <36>;
+	op,skin-thermal-high-threshold = <38>;
+	op,skin-thermal-pre-high-threshold = <36>;
+	op,skin-thermal-medium-threshold = <34>;
+	op,skin-thermal-normal-threshold = <32>;
 	op,enable-dash-current-dynamic-adjust;
 
 	/* skin thermal temp adjust the pd current */
-	op,pd-skin-thermal-high-threshold = <39>;
-	op,pd-skin-thermal-normal-threshold = <37>;
+	op,pd-skin-thermal-high-threshold = <38>;
+	op,pd-skin-thermal-normal-threshold = <32>;
 	op,enable-pd-current-dynamic-adjust;
 };
 
@@ -228,66 +217,66 @@
 		wake-capable-sensor;
 		trips {
 			freq_config0: freq_config0 {
-				temperature = <46000>;
-				hysteresis = <2000>;
+				temperature = <40000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 			freq_config1: freq_config1 {
-                                temperature = <47000>;
-                                hysteresis = <1000>;
-                                type = "passive";
-                        };
+                temperature = <42000>;
+                hysteresis = <1000>;
+                type = "passive";
+            };
 			freq_config2: freq_config2 {
-				temperature = <49000>;
-				hysteresis = <2000>;
+				temperature = <44000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 			freq_config3: freq_config3 {
-                                temperature = <50000>;
-                                hysteresis = <2000>;
-                                type = "passive";
-                        };
+                temperature = <46000>;
+                hysteresis = <1000>;
+                type = "passive";
+            };
 		};
 		cooling-maps {
 			freq_dev0 {
 				trip = <&freq_config1>;
 				cooling-device =
-					<&msm_gpu THERMAL_NO_LIMIT (THERMAL_MAX_LIMIT-1)>;/*345*/
+					<&msm_gpu THERMAL_NO_LIMIT (THERMAL_MAX_LIMIT-3)>;/*305.0MHz*/
 			};
-                        freq_dev1 {
-                                trip = <&freq_config0>;
-                                cooling-device =
-                                        <&CPU4 7 7>;/*1766*/
-                        };
-                        freq_dev2 {
-                                trip = <&freq_config0>;
-                                cooling-device =
-                                        <&CPU7 8 8>;/*2073*/
-                        };
+            freq_dev1 {
+                trip = <&freq_config0>;
+                cooling-device =
+                    <&CPU4 8 8>;/*1670.4MHz*/
+            };
+            freq_dev2 {
+                trip = <&freq_config0>;
+                cooling-device =
+                    <&CPU7 8 8>;/*2073.6MHz (Nominal_L1)*/
+            };
 			freq_dev3 {
 				trip = <&freq_config1>;
 				cooling-device =
-					<&CPU0 2 2>;/*1612*/
+					<&CPU0 3 3>;/*1516.8MHz (Nominal)*/
 			};
 			freq_dev4 {
 				trip = <&freq_config1>;
 				cooling-device =
-					<&CPU4 10 10>;/*1478*/
+					<&CPU4 9 9>;/*1574.4MHz (Nominal_L1)*/
 			};
 			freq_dev5 {
 				trip = <&freq_config1>;
 				cooling-device =
-					<&CPU7 17 17>;/*1075*/
+					<&CPU7 12 12>;/*1632.0MHz (Nominal)*/
 			};
 			freq_dev7 {
 				trip = <&freq_config2>;
 				cooling-device =
-					<&CPU0 3 3>;/*1516*/
+					<&CPU0 5 5>;/*1344.0MHz (Nominal)*/
 			};
 			freq_dev8 {
 				trip = <&freq_config2>;
 				cooling-device =
-					<&CPU4 14 14>;/*1056*/
+					<&CPU4 14 14>;/*1056.0MHz (SVS_L1)*/
 			};
 			freq_dev9 {
 				trip = <&freq_config2>;
@@ -295,15 +284,15 @@
 					<&cpu7_isolate 1 1>;
 			};
 			freq_dev10 {
-                                trip = <&freq_config3>;
-                                cooling-device =
-                                        <&CPU0 10 10>;/*883*/
-                        };
+                trip = <&freq_config3>;
+                cooling-device =
+                    <&CPU0 10 10>;/*883.2MHz (SVS)*/
+            };
 			freq_dev11 {
-                                trip = <&freq_config3>;
-                                cooling-device =
-                                        <&cpu4_isolate 1 1>;
-                        };
+                trip = <&freq_config3>;
+                cooling-device =
+                    <&cpu4_isolate 1 1>;
+            };
 		};
 	};
 
@@ -315,13 +304,13 @@
 		wake-capable-sensor;
 		trips {
 			freq_config4: freq_config4 {
-				temperature = <67000>;
-				hysteresis = <2000>;
+				temperature = <62000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 			freq_config5: freq_config5 {
-				temperature = <69000>;
-				hysteresis = <2000>;
+				temperature = <64000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 		};
@@ -329,48 +318,47 @@
 			freq_dev0 {
 				trip = <&freq_config4>;
 				cooling-device =
-					<&CPU0 2 2>;/*1612 17*/
+					<&CPU0 2 2>;/*1612.8MHz (Nominal_L1) 17*/
 			};
 			freq_dev1 {
 				trip = <&freq_config4>;
 				cooling-device =
-					<&CPU4 7 7>;/*1766 18*/
+					<&CPU4 8 8>;/*1670.4MHz 18*/
 			};
 			freq_dev2 {
 				trip = <&freq_config4>;
 				cooling-device =
-					<&CPU7 8 8>;/*2073 20*/
+					<&CPU7 8 8>;/*2073.6MHz (Nominal_L1) 20*/
 			};
 			freq_dev3 {
 				trip = <&freq_config5>;
 				cooling-device =
-					<&CPU0 3 3>;/*1382*/
+					<&CPU0 3 3>;/*1516.8MHz (Nominal)*/
 			};
 			freq_dev4 {
 				trip = <&freq_config5>;
 				cooling-device =
-					<&CPU4 4 4>;/*1748*/
+					<&CPU4 9 9>;/*1574.4MHz (Nominal_L1)*/
 			};
 			freq_dev5 {
 				trip = <&freq_config5>;
 				cooling-device =
-					<&CPU7 11 11>;/*1747*/
+					<&CPU7 12 12>;/*1632.0MHz (Nominal)*/
 			};
 			freq_dev6 {
 				trip = <&freq_config4>;
 				cooling-device =
 					<&msm_gpu THERMAL_NO_LIMIT
-						(THERMAL_MAX_LIMIT-3)>;/*441*/
+						(THERMAL_MAX_LIMIT-4)>;/*400.0MHz*/
 			};
 			freq_dev7 {
 				trip = <&freq_config5>;
 				cooling-device =
 					<&msm_gpu THERMAL_NO_LIMIT
-						(THERMAL_MAX_LIMIT-2)>;/*400*/
+						(THERMAL_MAX_LIMIT-3)>;/*305.0MHz*/
 			};
 		};
 	};
-
 };
 
 &vendor {

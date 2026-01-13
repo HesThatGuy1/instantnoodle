@@ -143,17 +143,6 @@
 	warm-bat-decidegc = <450>;
 	hot-bat-decidegc = <500>;
 	qcom,otg-cl-ua = <1500000>;
-	op,sw-iterm-ma = <310>;
-	op,sw-check-full-enable;
-	/* temp region settings */
-	cold-bat-decidegc = <20>;
-	little-cold-bat-decidegc = <0>;
-	cool-bat-decidegc = <50>;
-	little-cool-bat-decidegc = <120>;
-	pre-normal-bat-decidegc = <160>;
-	warm-bat-decidegc = <450>;
-	hot-bat-decidegc = <500>;
-	qcom,otg-cl-ua = <1500000>;
 	op,sw-iterm-ma = <225>;
 	op,sw-check-full-enable;
 
@@ -168,15 +157,15 @@
 	ffc-full-vbat-mv = <4480>;
 
 	/* skin thermal temp adjust the dash current */
-	op,skin-thermal-high-threshold = <41>;
-	op,skin-thermal-pre-high-threshold = <39>;
-	op,skin-thermal-medium-threshold = <38>;
-	op,skin-thermal-normal-threshold = <36>;
+	op,skin-thermal-high-threshold = <38>;
+	op,skin-thermal-pre-high-threshold = <36>;
+	op,skin-thermal-medium-threshold = <34>;
+	op,skin-thermal-normal-threshold = <32>;
 	op,enable-dash-current-dynamic-adjust;
 
 	/* skin thermal temp adjust the pd current */
 	op,pd-skin-thermal-high-threshold = <38>;
-	op,pd-skin-thermal-normal-threshold = <36>;
+	op,pd-skin-thermal-normal-threshold = <32>;
 	op,enable-pd-current-dynamic-adjust;
 };
 
@@ -206,23 +195,23 @@
 		wake-capable-sensor;
 		trips {
 			skint_therm_trip0: skint_therm_trip0 {
-				temperature = <46000>;
-				hysteresis = <2000>;
+				temperature = <40000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 			skint_therm_trip1: skint_therm_trip1 {
-                                temperature = <47000>;
-                                hysteresis = <1000>;
-                                type = "passive";
-                        };
+                temperature = <42000>;
+                hysteresis = <1000>;
+                type = "passive";
+            };
 			skint_therm_trip2: skint_therm_trip2 {
-				temperature = <48000>;
-				hysteresis = <2000>;
+				temperature = <44000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 			skint_therm_trip3: skint_therm_trip3 {
-				temperature = <50000>;
-				hysteresis = <2000>;
+				temperature = <46000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 		};
@@ -230,42 +219,42 @@
 			freq_dev0 {
 				trip = <&skint_therm_trip0>;
 				cooling-device =
-					<&msm_gpu THERMAL_NO_LIMIT (THERMAL_MAX_LIMIT-2)>;/*441.6*/
+					<&msm_gpu THERMAL_NO_LIMIT (THERMAL_MAX_LIMIT-3)>;/*305.0MHz*/
 			};
 			freq_dev1 {
 				trip = <&skint_therm_trip0>;
 				cooling-device =
-					<&CPU4 7 7>;/*1766*/
+					<&CPU4 8 8>;/*1670.4MHz*/
 			};
 			freq_dev2 {
 				trip = <&skint_therm_trip0>;
 				cooling-device =
-					<&CPU7 8 8>;/*2073*/
+					<&CPU7 8 8>;/*2073.6MHz (Nominal_L1)*/
 			};
 			freq_dev3 {
-                                trip = <&skint_therm_trip1>;
-                                cooling-device =
-                                        <&CPU4 9 9>;/*1478*/
-                        };
-                        freq_dev4 {
-                                trip = <&skint_therm_trip1>;
-                                cooling-device =
-                                        <&CPU7 11 11>;/*1747*/
-                        };
+                trip = <&skint_therm_trip1>;
+                cooling-device =
+                    <&CPU4 9 9>;/*1574.4MHz (Nominal_L1)*/
+            };
+            freq_dev4 {
+                trip = <&skint_therm_trip1>;
+                cooling-device =
+                    <&CPU7 12 12>;/*1632.0MHz (Nominal)*/
+            };
 			freq_dev5 {
 				trip = <&skint_therm_trip2>;
 				cooling-device =
-					<&msm_gpu THERMAL_NO_LIMIT (THERMAL_MAX_LIMIT-1)>;/*400*/
+					<&msm_gpu THERMAL_NO_LIMIT (THERMAL_MAX_LIMIT-2)>;/*240.0MHz*/
 			};
 			freq_dev6 {
 				trip = <&skint_therm_trip2>;
 				cooling-device =
-					<&CPU0 3 3>;/*1516*/
+					<&CPU0 5 5>;/*1344.0MHz (Nominal)*/
 			};
 			freq_dev7 {
 				trip = <&skint_therm_trip2>;
 				cooling-device =
-					<&CPU4 14 14>;/*1056.0*/
+					<&CPU4 14 14>;/*1056.0MHz (SVS_L1)*/
 			};
 			freq_dev8 {
 				trip = <&skint_therm_trip2>;
@@ -275,7 +264,7 @@
 			freq_dev9 {
 				trip = <&skint_therm_trip3>;
 				cooling-device =
-					<&CPU0 10 10>;/*883.2*/
+					<&CPU0 10 10>;/*883.2MHz (SVS)*/
 			};
 			freq_dev10 {
 				trip = <&skint_therm_trip3>;
@@ -293,13 +282,13 @@
 		wake-capable-sensor;
 		trips {
 			msm_therm_trip0: msm_therm_trip0 {
-				temperature = <63000>;
-				hysteresis = <2000>;
+				temperature = <62000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 			msm_therm_trip1: msm_therm_trip1 {
-				temperature = <65000>;
-				hysteresis = <2000>;
+				temperature = <64000>;
+				hysteresis = <1000>;
 				type = "passive";
 			};
 		};
@@ -307,46 +296,45 @@
 			freq_dev0 {
 				trip = <&msm_therm_trip0>;
 				cooling-device =
-					<&msm_gpu THERMAL_NO_LIMIT (THERMAL_MAX_LIMIT-3)>;/*490(SVS_L1)*/
+					<&msm_gpu THERMAL_NO_LIMIT (THERMAL_MAX_LIMIT-4)>;/*400.0MHz*/
 			};
 			freq_dev1 {
 				trip = <&msm_therm_trip0>;
 				cooling-device =
-					<&CPU0 2 2>;/*1612MHz(Nominal_L1)*/
+					<&CPU0 2 2>;/*1612.8MHz (Nominal_L1)*/
 			};
 			freq_dev2 {
 				trip = <&msm_therm_trip0>;
 				cooling-device =
-					<&CPU4 7 7>;/*1766.4MHz(Nominal_L1)*/
+					<&CPU4 8 8>;/*1670.4MHz*/
 			};
 			freq_dev3 {
 				trip = <&msm_therm_trip0>;
 				cooling-device =
-					<&CPU7 8 8>;/*2073.6MHz(Nominal_L1)*/
+					<&CPU7 8 8>;/*2073.6MHz (Nominal_L1)*/
 			};
 			freq_dev4 {
 				trip = <&msm_therm_trip1>;
 				cooling-device =
-					<&msm_gpu THERMAL_NO_LIMIT (THERMAL_MAX_LIMIT-2)>;/*441.6(SVS_L0)*/
+					<&msm_gpu THERMAL_NO_LIMIT (THERMAL_MAX_LIMIT-3)>;/*305.0MHz*/
 			};
 			freq_dev5 {
 				trip = <&msm_therm_trip1>;
 				cooling-device =
-					<&CPU0 3 3>;/*1516.8MHz(Nominal)*/
+					<&CPU0 3 3>;/*1516.8MHz (Nominal)*/
 			};
 			freq_dev6 {
 				trip = <&msm_therm_trip1>;
 				cooling-device =
-					<&CPU4 9 9>;/*1574.4MHz(Nominal_L1)*/
+					<&CPU4 9 9>;/*1574.4MHz (Nominal_L1)*/
 			};
 			freq_dev7 {
 				trip = <&msm_therm_trip1>;
 				cooling-device =
-				<&CPU7 12 12>;/*1632.0MHz(Nominal)*/
+				    <&CPU7 12 12>;/*1632.0MHz (Nominal)*/
 			};
 		};
 	};
-
 };
 
 &vendor {

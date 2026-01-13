@@ -34,4 +34,4 @@ export CROSS_COMPILE_ARM32=arm-linux-androideabi-
 	# Build in Out folder
 make O=out mrproper
 make O=out op8_defconfig
-time make -j$(nproc --all) O=out CC=clang
+time make -j$(nproc --all) O=out CC=clang DTC_EXT=dtc
