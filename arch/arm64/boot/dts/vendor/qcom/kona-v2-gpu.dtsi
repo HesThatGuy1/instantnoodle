@@ -69,7 +69,7 @@
 			qcom,bus-min-ddr8 = <6>;
 			qcom,bus-max-ddr8 = <7>;
 
-			qcom,acd-level = <0x802b5ffd>;
+			qcom,acd-level = <0xa02b5ffd>;
 		};
 
 		qcom,gpu-pwrlevel@1 {
@@ -83,7 +83,7 @@
 			qcom,bus-min-ddr8 = <5>;
 			qcom,bus-max-ddr8 = <6>;
 
-			qcom,acd-level = <0x802b5ffd>;
+			qcom,acd-level = <0xa02b5ffd>;
 		};
 
 		qcom,gpu-pwrlevel@2 {

@@ -75,9 +75,9 @@
 
 		qcom,mdss-dsi-display-timings {
 			timing@0 {
-				qcom,mdss-mdp-transfer-time-us = <12000>; //for 60fps
-				qcom,mdss-dsi-panel-framerate = <60>;
-				qcom,mdss-dsi-panel-clockrate = <1100000000>;
+				qcom,mdss-mdp-transfer-time-us = <6000>; //for 120fps
+				qcom,mdss-dsi-panel-framerate = <120>;
+				qcom,mdss-dsi-panel-clockrate = <673000000>; //673000000 = not "true" 120fps
 				qcom,mdss-dsi-panel-width = <1080>;
 				qcom,mdss-dsi-panel-height = <2400>;
 				qcom,mdss-dsi-h-front-porch = <52>;
@@ -86,7 +86,7 @@
 				qcom,mdss-dsi-h-sync-skew = <0>;
 				qcom,mdss-dsi-h-sync-pulse = <0>;
 				qcom,mdss-dsi-v-back-porch = <8>;
-				qcom,mdss-dsi-v-front-porch = <1208>;
+				qcom,mdss-dsi-v-front-porch = <4>;
 				qcom,mdss-dsi-v-pulse-width = <4>;
 				qcom,mdss-dsi-h-left-border = <0>;
 				qcom,mdss-dsi-h-right-border = <0>;
@@ -95,10 +95,10 @@
 				qcom,mdss-dsi-panel-jitter = <0x4 0x1>;
 
 				qcom,mdss-dsi-timing-switch-command = [
-					/* 60hz Transition */
+					/* 120hz Transition */
 					39 01 00 00 00 00 03 F0 5A 5A
-					39 01 00 00 00 00 02 60 00
-					39 01 00 00 0C 00 03 F0 A5 A5
+					39 01 00 00 00 00 02 60 10
+					39 01 00 00 00 00 03 F0 A5 A5
 				];
 				qcom,mdss-dsi-on-command = [
 					/* DSC Setting */
@@ -169,9 +169,9 @@
 					39 01 00 00 00 00 02 B7 4C
 					39 01 00 00 00 00 03 F0 A5 A5
 					39 01 00 00 00 00 02 53 20
-					/* 60hz Transition */
+					/* 120hz Transition */
 					39 01 00 00 00 00 03 F0 5A 5A
-					39 01 00 00 00 00 02 60 00
+					39 01 00 00 00 00 02 60 10
 					39 01 00 00 00 00 03 F0 A5 A5
 					/* ACL Mode */
 					39 01 00 00 00 00 03 F0 5A 5A
@@ -206,7 +206,7 @@
 					39 01 00 00 00 00 03 F0 A5 A5
 					/* HBM Mode ON */
 					39 01 00 00 00 00 02 53 E0
-					39 01 00 00 1E 00 03 51 0A 18
+					39 01 00 00 0F 00 03 51 0A 18
 				];
 				qcom,mdss-dsi-panel-hbm-on-command-5 = [
 					39 01 00 00 00 00 03 F0 5A 5A
@@ -215,7 +215,7 @@
 					39 01 00 00 00 00 03 F0 A5 A5
 					/* HBM Mode ON */
 					39 01 00 00 00 00 02 53 E0
-					39 01 00 00 1E 00 03 51 0C A8
+					39 01 00 00 0F 00 03 51 0C A8
 				];
 				qcom,mdss-dsi-panel-hbm-off-command = [
 					39 01 00 00 00 00 03 F0 5A 5A
@@ -239,47 +239,47 @@
 				];
 				qcom,mdss-dsi-panel-aod-on-command-5 = [
 					/* 50nit */
-					05 01 00 00 11 00 01 28
+					05 01 00 00 09 00 01 28
 					39 01 00 00 00 00 03 F0 5A 5A
 					15 01 00 00 00 00 02 60 00
 					15 01 00 00 00 00 02 B0 0B
 					39 01 00 00 00 00 03 D8 00 00
 					15 01 00 00 00 00 02 53 22
 					15 01 00 00 00 00 02 E3 00
-					39 01 00 00 11 00 03 F0 A5 A5
+					39 01 00 00 09 00 03 F0 A5 A5
 					05 01 00 00 00 00 01 29
 				];
 				qcom,mdss-dsi-panel-aod-off-command = [
-					/* 60hz Transition */
-					05 01 00 00 11 00 01 28
+					/* 120hz Transition */
+					05 01 00 00 09 00 01 28
 					39 01 00 00 00 00 03 F0 5A 5A
 					15 01 00 00 00 00 02 B0 0B
 					39 01 00 00 00 00 03 D8 09 70
 					15 01 00 00 00 00 02 53 28
-					15 01 00 00 00 00 02 60 00
-					39 01 00 00 11 00 03 F0 A5 A5
+					15 01 00 00 00 00 02 60 10
+					39 01 00 00 09 00 03 F0 A5 A5
 					05 01 00 00 00 00 01 29
 				];
 				qcom,mdss-dsi-panel-aod-off-samsung-command = [
-					/* 60hz Transition */
-					05 01 00 00 11 00 01 28
+					/* 120hz Transition */
+					05 01 00 00 09 00 01 28
 					39 01 00 00 00 00 03 F0 5A 5A
 					15 01 00 00 00 00 02 B0 0B
 					39 01 00 00 00 00 03 D8 09 70
 					15 01 00 00 00 00 02 53 28
-					15 01 00 00 00 00 02 60 00
-					39 01 00 00 11 00 03 F0 A5 A5
+					15 01 00 00 00 00 02 60 10
+					39 01 00 00 09 00 03 F0 A5 A5
 					05 01 00 00 00 00 01 29
 				];
 				qcom,mdss-dsi-panel-aod-off-new-command = [
-					/* 60hz Transition */
-					05 01 00 00 11 00 01 28
+					/* 120hz Transition */
+					05 01 00 00 09 00 01 28
 					39 01 00 00 00 00 03 F0 5A 5A
 					15 01 00 00 00 00 02 B0 0B
 					39 01 00 00 00 00 03 D8 09 70
 					15 01 00 00 00 00 02 53 28
-					15 01 00 00 00 00 02 60 00
-					39 01 00 00 11 00 03 F0 A5 A5
+					15 01 00 00 00 00 02 60 10
+					39 01 00 00 09 00 03 F0 A5 A5
 					05 01 00 00 00 00 01 29
 				];
 				qcom,mdss-dsi-panel-aod-off-hbm-on-command = [
@@ -289,17 +289,17 @@
 					39 01 00 00 00 00 03 F0 A5 A5
 					/* HBM Mode ON */
 					39 01 00 00 00 00 02 53 E0
-					39 01 00 00 1E 00 03 51 0C A8
+					39 01 00 00 0F 00 03 51 0C A8
 				];
 				qcom,mdss-dsi-panel-real-aod-off-hbm-on-command = [
-					/* 60hz Transition */
-					05 01 00 00 11 00 01 28
+					/* 120hz Transition */
+					05 01 00 00 09 00 01 28
 					39 01 00 00 00 00 03 F0 5A 5A
 					15 01 00 00 00 00 02 B0 0B
 					39 01 00 00 00 00 03 D8 09 70
 					15 01 00 00 00 00 02 53 28
-					15 01 00 00 00 00 02 60 00
-					39 01 00 00 11 00 03 F0 A5 A5
+					15 01 00 00 00 00 02 60 10
+					39 01 00 00 09 00 03 F0 A5 A5
 					05 01 00 00 00 00 01 29
 
 					39 01 00 00 00 00 03 F0 5A 5A
@@ -308,7 +308,7 @@
 					39 01 00 00 00 00 03 F0 A5 A5
 					/* HBM Mode ON */
 					39 01 00 00 00 00 02 53 E0
-					39 01 00 00 1E 00 03 51 0C A8
+					39 01 00 00 0F 00 03 51 0C A8
 				];
 				qcom,mdss-dsi-panel-hbm-off-aod-on-command = [
 					39 01 00 00 00 00 03 F0 5A 5A
@@ -415,8 +415,9 @@
 
 			timing@1 {
 				qcom,mdss-dsi-timing-default;
+				qcom,mdss-mdp-transfer-time-us = <6000>; //for 120fps
 				qcom,mdss-dsi-panel-framerate = <120>;
-				qcom,mdss-dsi-panel-clockrate = <1100000000>;
+				qcom,mdss-dsi-panel-clockrate = <673000000>; //673000000 = not "true" 120fps
 				qcom,mdss-dsi-panel-width = <1080>;
 				qcom,mdss-dsi-panel-height = <2400>;
 				qcom,mdss-dsi-h-front-porch = <52>;
@@ -789,5 +790,6 @@
 			qcom,display-topology = <1 1 1>,<2 2 1>;
 			qcom,default-topology-index = <1>;
 		};
+		/delete-node/ timing@0;
 	};
 };
