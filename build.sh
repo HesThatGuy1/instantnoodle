@@ -33,4 +33,4 @@ export CROSS_COMPILE=aarch64-linux-android-
 	# Build in Out folder
 make O=out mrproper
 make O=out handeli_defconfig
-time make -j$(nproc --all) O=out CC=clang
+time make -j$(nproc --all) O=out CC=clang DTC_EXT=dtc
