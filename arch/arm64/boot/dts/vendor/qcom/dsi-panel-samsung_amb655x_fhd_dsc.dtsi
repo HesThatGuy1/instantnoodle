@@ -75,7 +75,8 @@
 
 		qcom,mdss-dsi-display-timings {
 			timing@0 {
-				qcom,mdss-mdp-transfer-time-us = <12000>; //for 60fps
+				qcom,mdss-dsi-timing-default;
+				qcom,mdss-mdp-transfer-time-us = <16000>; //for 60fps
 				qcom,mdss-dsi-panel-framerate = <60>;
 				qcom,mdss-dsi-panel-clockrate = <1100000000>;
 				qcom,mdss-dsi-panel-width = <1080>;
@@ -414,9 +415,9 @@
 			};
 
 			timing@1 {
-				qcom,mdss-dsi-timing-default;
+				qcom,mdss-mdp-transfer-time-us = <8000>; //for 120fps
 				qcom,mdss-dsi-panel-framerate = <120>;
-				qcom,mdss-dsi-panel-clockrate = <1100000000>;
+				qcom,mdss-dsi-panel-clockrate = <1100000000>; //673000000 = not "true" 120fps, 674000000 = "true" 120fps
 				qcom,mdss-dsi-panel-width = <1080>;
 				qcom,mdss-dsi-panel-height = <2400>;
 				qcom,mdss-dsi-h-front-porch = <52>;
