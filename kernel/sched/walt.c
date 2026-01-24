@@ -104,7 +104,7 @@ unsigned int sysctl_sched_walt_rotate_big_tasks;
 unsigned int walt_rotation_enabled;
 
 __read_mostly unsigned int sysctl_sched_asym_cap_sibling_freq_match_pct = 100;
-__read_mostly unsigned int sched_ravg_hist_size = 1;
+__read_mostly unsigned int sched_ravg_hist_size = 2;
 
 static __read_mostly unsigned int sched_io_is_busy = 1;
 
