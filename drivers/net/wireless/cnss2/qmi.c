@@ -826,7 +826,11 @@ void cnss_get_filename(char *filename,
 					 P821_PUBLIC_AMERICA_DEFAULT_BDF);
 			break;
 			}
-		} else if (hw_id == 15) {
+		} else if (hw_id == 15 || hw_id == 51 || hw_id == 52 ||
+				hw_id == 53 || hw_id == 54 || hw_id == 55 ||
+				hw_id == 21 || hw_id == 22 || hw_id == 23 ||
+				hw_id == 11 || hw_id == 12 || hw_id == 13 ||
+				hw_id == 14) {
 			switch (rf_id) {
 			case 11:
 			cnss_pr_dbg("it is China PVT version, begin to load the China BDF file");
@@ -1146,9 +1150,11 @@ void cnss_get_filename(char *filename,
 					 P805_PUBLIC_AMERICA_DEFAULT_BDF);
 			break;
 			}
-		} else if (hw_id == 15 || hw_id == 53 || hw_id == 54 ||
-				hw_id == 55 || hw_id == 21 || hw_id == 22 ||
-				hw_id == 23) {
+		} else if (hw_id == 15 || hw_id == 51 || hw_id == 52 ||
+				hw_id == 53 || hw_id == 54 || hw_id == 55 ||
+				hw_id == 21 || hw_id == 22 || hw_id == 23 ||
+				hw_id == 11 || hw_id == 12 || hw_id == 13 ||
+				hw_id == 14) {
 			switch (rf_id) {
 			case 11:
 			cnss_pr_dbg("it is China PVT version, begin to load the China BDF file");
@@ -1423,7 +1429,11 @@ void cnss_get_filename(char *filename,
 					 P811_PUBLIC_AMERICA_DEFAULT_BDF);
 			break;
 			}
-		} else if (hw_id == 15 || hw_id == 53) {
+		} else if (hw_id == 15 || hw_id == 51 || hw_id == 52 ||
+				hw_id == 53 || hw_id == 54 || hw_id == 55 ||
+				hw_id == 21 || hw_id == 22 || hw_id == 23 ||
+				hw_id == 11 || hw_id == 12 || hw_id == 13 ||
+				hw_id == 14) {
 			switch (rf_id) {
 			case 11:
 			cnss_pr_dbg("it is China PVT version, begin to load the China BDF file");
