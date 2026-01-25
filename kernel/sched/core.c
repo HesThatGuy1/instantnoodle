@@ -8120,7 +8120,7 @@ static u64 cpu_shares_read_u64(struct cgroup_subsys_state *css,
 #ifdef CONFIG_CFS_BANDWIDTH
 static DEFINE_MUTEX(cfs_constraints_mutex);
 
-const u64 max_cfs_quota_period = 1 * NSEC_PER_SEC; /* 1s */
+const u64 max_cfs_quota_period = 50 * NSEC_PER_MSEC; /* 50ms */
 const u64 min_cfs_quota_period = 1 * NSEC_PER_MSEC; /* 1ms */
 
 static int __cfs_schedulable(struct task_group *tg, u64 period, u64 runtime);

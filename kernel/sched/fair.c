@@ -97,10 +97,10 @@ walt_dec_cfs_rq_stats(struct cfs_rq *cfs_rq, struct task_struct *p) {}
  * (to see the precise effective timeslice length of your workload,
  *  run vmstat and monitor the context-switches (cs) field)
  *
- * (default: 6ms * (1 + ilog(ncpus)), units: nanoseconds)
+ * (default: 8ms * (1 + ilog(ncpus)), units: nanoseconds)
  */
-unsigned int sysctl_sched_latency			= 2000000ULL;
-unsigned int normalized_sysctl_sched_latency		= 2000000ULL;
+unsigned int sysctl_sched_latency			= 8000000ULL;
+unsigned int normalized_sysctl_sched_latency		= 8000000ULL;
 
 /*
  * Enable/disable honoring sync flag in energy-aware wakeups.
@@ -136,10 +136,10 @@ enum sched_tunable_scaling sysctl_sched_tunable_scaling = SCHED_TUNABLESCALING_L
 /*
  * Minimal preemption granularity for CPU-bound tasks:
  *
- * (default: 0.75 msec * (1 + ilog(ncpus)), units: nanoseconds)
+ * (default: 1 msec * (1 + ilog(ncpus)), units: nanoseconds)
  */
-unsigned int sysctl_sched_min_granularity		= 250000ULL;
-unsigned int normalized_sysctl_sched_min_granularity	= 250000ULL;
+unsigned int sysctl_sched_min_granularity		= 1000000ULL;
+unsigned int normalized_sysctl_sched_min_granularity	= 1000000ULL;
 
 /*
  * This value is kept at sysctl_sched_latency/sysctl_sched_min_granularity
@@ -188,7 +188,7 @@ int __weak arch_asym_cpu_priority(int cpu)
  *
  * (default: 5 msec, units: microseconds)
  */
-unsigned int sysctl_sched_cfs_bandwidth_slice		= 2500UL;
+unsigned int sysctl_sched_cfs_bandwidth_slice		= 5000UL;
 #endif
 
 /*
@@ -205,12 +205,12 @@ unsigned int sched_capacity_margin_down[NR_CPUS] = {
 
 #ifdef CONFIG_SCHED_WALT
 /* 1ms default for 20ms window size scaled to 1024 */
-unsigned int sysctl_sched_min_task_util_for_boost = 51;
+unsigned int sysctl_sched_min_task_util_for_boost = 48;
 /* 0.68ms default for 20ms window size scaled to 1024 */
-unsigned int sysctl_sched_min_task_util_for_colocation = 35;
+unsigned int sysctl_sched_min_task_util_for_colocation = 32;
 __read_mostly unsigned int sysctl_sched_prefer_spread;
 #endif
-unsigned int sched_small_task_threshold = 102;
+unsigned int sched_small_task_threshold = 96;
 
 static inline void update_load_add(struct load_weight *lw, unsigned long inc)
 {
