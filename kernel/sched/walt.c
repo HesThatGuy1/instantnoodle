@@ -104,19 +104,19 @@ unsigned int sysctl_sched_walt_rotate_big_tasks;
 unsigned int walt_rotation_enabled;
 
 __read_mostly unsigned int sysctl_sched_asym_cap_sibling_freq_match_pct = 100;
-__read_mostly unsigned int sched_ravg_hist_size = 5;
+__read_mostly unsigned int sched_ravg_hist_size = 1;
 
 static __read_mostly unsigned int sched_io_is_busy = 1;
 
 __read_mostly unsigned int sysctl_sched_window_stats_policy =
-	WINDOW_STATS_MAX_RECENT_AVG;
+	WINDOW_STATS_MAX;
 
 unsigned int sysctl_sched_ravg_window_nr_ticks = (HZ / NR_WINDOWS_PER_SEC);
 
 static unsigned int display_sched_ravg_window_nr_ticks =
 	(HZ / NR_WINDOWS_PER_SEC);
 
-unsigned int sysctl_sched_dynamic_ravg_window_enable = (HZ == 250);
+unsigned int sysctl_sched_dynamic_ravg_window_enable = (HZ == 1000);
 
 /* Window size (in ns) */
 __read_mostly unsigned int sched_ravg_window = DEFAULT_SCHED_RAVG_WINDOW;
@@ -133,7 +133,7 @@ static __read_mostly unsigned int walt_cpu_util_freq_divisor;
 /* Initial task load. Newly created tasks are assigned this load. */
 unsigned int __read_mostly sched_init_task_load_windows;
 unsigned int __read_mostly sched_init_task_load_windows_scaled;
-unsigned int __read_mostly sysctl_sched_init_task_load_pct = 15;
+unsigned int __read_mostly sysctl_sched_init_task_load_pct = 45;
 
 /*
  * Maximum possible frequency across all cpus. Task demand and cpu
@@ -2668,7 +2668,7 @@ DEFINE_RWLOCK(related_thread_group_lock);
  * Task groups whose aggregate demand on a cpu is more than
  * sched_group_upmigrate need to be up-migrated if possible.
  */
-unsigned int __read_mostly sched_group_upmigrate = 20000000;
+unsigned int __read_mostly sched_group_upmigrate = 50000000;
 unsigned int __read_mostly sysctl_sched_group_upmigrate_pct = 100;
 
 /*
@@ -2676,7 +2676,7 @@ unsigned int __read_mostly sysctl_sched_group_upmigrate_pct = 100;
  * demand to less than sched_group_downmigrate before they are "down"
  * migrated.
  */
-unsigned int __read_mostly sched_group_downmigrate = 19000000;
+unsigned int __read_mostly sched_group_downmigrate = 40000000;
 unsigned int __read_mostly sysctl_sched_group_downmigrate_pct = 95;
 
 static inline
@@ -3783,13 +3783,13 @@ unlock:
 
 void sched_set_refresh_rate(enum fps fps)
 {
-	if (HZ == 250 && sysctl_sched_dynamic_ravg_window_enable) {
+	if (HZ == 1000 && sysctl_sched_dynamic_ravg_window_enable) {
 		if (fps > FPS90)
-			display_sched_ravg_window_nr_ticks = 2;
+			display_sched_ravg_window_nr_ticks = 1;
 		else if (fps == FPS90)
-			display_sched_ravg_window_nr_ticks = 3;
+			display_sched_ravg_window_nr_ticks = 1;
 		else
-			display_sched_ravg_window_nr_ticks = 5;
+			display_sched_ravg_window_nr_ticks = 2;
 
 		sched_window_nr_ticks_change();
 	}
@@ -3798,9 +3798,9 @@ EXPORT_SYMBOL(sched_set_refresh_rate);
 
 /* Migration margins */
 unsigned int sysctl_sched_capacity_margin_up[MAX_MARGIN_LEVELS] = {
-			[0 ... MAX_MARGIN_LEVELS-1] = 1078}; /* ~5% margin */
+			[0 ... MAX_MARGIN_LEVELS-1] = 1366}; /* ~25% margin = cpu is "overutilized" if over 75% capacity */
 unsigned int sysctl_sched_capacity_margin_down[MAX_MARGIN_LEVELS] = {
-			[0 ... MAX_MARGIN_LEVELS-1] = 1205}; /* ~15% margin */
+			[0 ... MAX_MARGIN_LEVELS-1] = 1575}; /* ~35% margin = cpu is "underutilized" if under 65% capacity */
 
 #ifdef CONFIG_PROC_SYSCTL
 static void sched_update_updown_migrate_values(bool up)
