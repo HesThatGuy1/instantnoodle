@@ -144,7 +144,7 @@ unsigned int normalized_sysctl_sched_min_granularity	= 500000ULL;
 /*
  * This value is kept at sysctl_sched_latency/sysctl_sched_min_granularity
  */
-static unsigned int sched_nr_latency = 16;
+static unsigned int sched_nr_latency = 8;
 
 /*
  * After fork, child runs first. If set to 0 (default) then
@@ -205,12 +205,12 @@ unsigned int sched_capacity_margin_down[NR_CPUS] = {
 
 #ifdef CONFIG_SCHED_WALT
 /* 0.5ms default for 8ms window size scaled to 1024 */
-unsigned int sysctl_sched_min_task_util_for_boost = 24;
+unsigned int sysctl_sched_min_task_util_for_boost = 64;
 /* 0.25ms default for 8ms window size scaled to 1024 */
-unsigned int sysctl_sched_min_task_util_for_colocation = 16;
+unsigned int sysctl_sched_min_task_util_for_colocation = 48;
 __read_mostly unsigned int sysctl_sched_prefer_spread;
 #endif
-unsigned int sched_small_task_threshold = 32;
+unsigned int sched_small_task_threshold = 128;
 
 static inline void update_load_add(struct load_weight *lw, unsigned long inc)
 {
